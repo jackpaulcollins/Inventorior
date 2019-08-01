@@ -1,5 +1,25 @@
+/* Nav Styles */
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  background-color: rgb(95, 235, 95);
+  color: rgb(92, 88, 88);
+  padding-left: 1%;
+}
+
+.nav-bar-links {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+  padding-right: 3%;
+  align-items: center;
+}
+
+/* Box Styles */
 .item-box {
-  height: 20rem;
-  width: 20rem;
+  height: 7rem;
+  width: 5rem;
   border: solid gray 1px;
 }
