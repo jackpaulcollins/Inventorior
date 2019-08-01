@@ -5,8 +5,15 @@ class ItemField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemBoxes: 15
+      itemBoxes: 0
     }
+    this.createItem = this.createItem.bind(this);
+  }
+
+  createItem() {
+    this.setState({
+      itemBoxes: this.state.itemBoxes + 1
+    })
   }
 
   getBoxesToRender(){
@@ -19,8 +26,11 @@ class ItemField extends React.Component {
 
   render () {
     return (
-      <div className='item-field'>
-       {this.getBoxesToRender()}
+      <div>
+        <button onClick={this.createItem}>Add Item to Inventory</button>
+        <div className='item-field'>
+        {this.getBoxesToRender()}
+        </div>
       </div>
     )
   }
