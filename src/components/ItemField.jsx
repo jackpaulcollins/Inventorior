@@ -5,7 +5,7 @@ class ItemField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemBoxes: 7
+      itemBoxes: 90
     }
   }
 
