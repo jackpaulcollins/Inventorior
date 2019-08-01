@@ -22,4 +22,15 @@
   height: 7rem;
   width: 5rem;
   border: solid gray 1px;
+  margin: 2%;
+}
+
+.item-field{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: 5%;
+  width: 80%;
+  height: 50%;
+  flex-wrap: wrap;
 }
