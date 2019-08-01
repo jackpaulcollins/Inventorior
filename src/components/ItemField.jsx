@@ -5,14 +5,14 @@ class ItemField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemBoxes: 90
+      itemBoxes: 15
     }
   }
 
   getBoxesToRender(){
     let numberOfItemBoxesToRender = [];
     for (let i = 0; i < this.state.itemBoxes; i++) {
-      numberOfItemBoxesToRender.push(<Item key={i} />)
+      numberOfItemBoxesToRender.push(<Item key= {i} id={i} />)
     }
     return numberOfItemBoxesToRender;
   }
