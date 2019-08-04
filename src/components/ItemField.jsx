@@ -9,31 +9,27 @@ class ItemField extends React.Component {
     this.state = {
       itemBoxes: null,
       data: null
-
     }
   }
 
   componentDidMount() {
-    this.onLoad();
+    this.getItemsPromise().then((data) => {
+      this.setState({ data: data })
+    });
   }
 
-  onLoad = (e) => {
-    const db = firebase.firestore();
-    const items = db.collection('items');
-    items.get().then((doc) => {
-        if (doc.exists) {
-            let data = doc.data();
-            this.setState({ data: data });
-            console.log("Document data:", data);
-        } else {
-            // doc.data() will be undefined in this case
-            this.setState({ data: null });
-            console.log("No such document!");
-        }
-    }).catch(function (error) {
-        this.setState({ data: null });
-        console.log("Error getting document:", error);
-    }); 
+  getItemsPromise() {
+    return new Promise((resolve, reject) => {
+      this.cancelPromise = reject;
+      const db = firebase.firestore();
+      db.collection("items").get().then(function(querySnapshot) {
+        let data = [];
+        querySnapshot.forEach(function(doc) {
+          data.push(doc.data());
+        });
+        resolve(data);
+      });
+    });
   }
 
   getBoxesToRender(){
