@@ -6,8 +6,10 @@ class NewItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ItemName: ""
-    }
+        itemName: '',
+        itemQuantity: '',
+        itemLocation: ''
+      }
   }
 
   updateInput = e => {
@@ -20,10 +22,14 @@ class NewItem extends React.Component {
     e.preventDefault();
     const db = firebase.firestore();
     db.collection('items').add({
-      itemName: this.state.itemName
+      itemName: this.state.itemName,
+      itemQuantity: this.state.itemQuantity,
+      itemLocation: this.state.itemLocation
     });
     this.setState({
-      ItemName: ""
+      itemName: '',
+      itemQuantity: '',
+      itemLocation: ''
     });
   };
 
@@ -35,7 +41,21 @@ class NewItem extends React.Component {
           id="itemName"
           placeholder="Item Name"
           onChange={this.updateInput}
-          value={this.state.ItemName}
+          value={this.state.itemName}
+        />
+         <input
+          type="text"
+          id="itemQuantity"
+          placeholder="Item Quantity"
+          onChange={this.updateInput}
+          value={this.state.itemQuantity}
+        />
+         <input
+          type="text"
+          id="itemLocation"
+          placeholder="Item Location"
+          onChange={this.updateInput}
+          value={this.state.itemLocation}
         />
         <button type="submit">Create New Iventory Item</button>
       </form>
