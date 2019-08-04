@@ -1,5 +1,6 @@
 import React from 'react'
 import Item from './Item'
+import NewItem from './NewItem'
 
 class ItemField extends React.Component {
   constructor(props) {
@@ -19,8 +20,11 @@ class ItemField extends React.Component {
 
   render () {
     return (
-      <div className='item-field'>
-       {this.getBoxesToRender()}
+      <div>
+        <NewItem />
+        <div className='item-field'>
+        {this.getBoxesToRender()}
+        </div>
       </div>
     )
   }
