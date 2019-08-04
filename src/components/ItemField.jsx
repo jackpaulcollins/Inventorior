@@ -1,13 +1,39 @@
-import React from 'react'
-import Item from './Item'
-import NewItem from './NewItem'
+import React from 'react';
+import Item from './Item';
+import NewItem from './NewItem';
+import firebase from 'firebase';
 
 class ItemField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemBoxes: 90
+      itemBoxes: null,
+      data: null
+
     }
+  }
+
+  componentDidMount() {
+    this.onLoad();
+  }
+
+  onLoad = (e) => {
+    const db = firebase.firestore();
+    const items = db.collection('items');
+    items.get().then((doc) => {
+        if (doc.exists) {
+            let data = doc.data();
+            this.setState({ data: data });
+            console.log("Document data:", data);
+        } else {
+            // doc.data() will be undefined in this case
+            this.setState({ data: null });
+            console.log("No such document!");
+        }
+    }).catch(function (error) {
+        this.setState({ data: null });
+        console.log("Error getting document:", error);
+    }); 
   }
 
   getBoxesToRender(){

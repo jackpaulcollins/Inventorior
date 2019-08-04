@@ -7,7 +7,7 @@ class NewItem extends React.Component {
     super(props);
     this.state = {
         itemName: '',
-        itemQuantity: '',
+        itemQuantity: 0,
         itemLocation: ''
       }
   }
@@ -28,7 +28,7 @@ class NewItem extends React.Component {
     });
     this.setState({
       itemName: '',
-      itemQuantity: '',
+      itemQuantity: 0,
       itemLocation: ''
     });
   };
