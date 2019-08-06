@@ -4,36 +4,39 @@ import NewItem from './NewItem';
 import firebase from 'firebase';
 
 class ItemField extends React.Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
       itemBoxes: null,
       data: null
     }
-    this.createItem = this.createItem.bind(this);
     this.fetchItemdData = this.fetchItemdData.bind(this);
   }
 
-  createItem() {
-    this.setState({
-      itemBoxes: this.state.itemBoxes + 1
-    }) 
+  componentDidMount() {
+    this._isMounted = true;
+    this.fetchItemdData();
   }
 
-  componentDidMount() {
-    this.fetchItemdData();
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   componentWillUpdate() {
-    this.fetchItemdData();
+    if (this._isMounted) {
+      this.fetchItemdData();
+    }
   }
 
   fetchItemdData() {
-    this.getItemsPromise().then((data) => {
-      this.setState({ data: data,
-                      itemBoxes: data.length
-                     })
-    });
+    if (this._isMounted) {
+      this.getItemsPromise().then((data) => {
+        this.setState({ data: data,
+                        itemBoxes: data.length
+                      })
+      });
+    }
   }
 
   getItemsPromise() {
@@ -54,7 +57,8 @@ class ItemField extends React.Component {
     let numberOfItemBoxesToRender = [];
     for (let i = 0; i < this.state.itemBoxes; i++) {
       numberOfItemBoxesToRender.push(
-                                      <Item key={i} 
+                                      <Item key={i}
+                                            id={this.state.data[i].id}
                                             itemName={this.state.data[i].itemName}
                                             itemQuantity={this.state.data[i].itemQuantity} 
                                             itemLocation={this.state.data[i].itemLocation}

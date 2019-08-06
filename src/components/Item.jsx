@@ -1,9 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import ItemDetailPage from './ItemDetailPage';
 import { Link } from 'react-router-dom';
-import React from 'react';
-import PropTypes from 'prop-types';
 
 class Item extends React.Component {
   constructor(props) {
@@ -15,10 +12,10 @@ class Item extends React.Component {
   render () {
     return (
       <div className='item-box'>
-         <Link to={ `/item/${this.props.id}` } component={ ItemDetailPage }>
-           <p>Item Details</p>
-         </Link>
         <div>
+          <Link to={ `/item/${this.props.id}` } params={this.props.id} >
+           <p>Item Details</p>
+          </Link>
           <h3>Item: {this.props.itemName}</h3>
           <p>Item Quantity: {this.props.itemQuantity}</p>
           <p>Item Location: {this.props.itemLocation}</p>
@@ -29,7 +26,7 @@ class Item extends React.Component {
 };
 
 Item.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   itemName: PropTypes.string,
   itemQuantity: PropTypes.string,
   itemLocation: PropTypes.string

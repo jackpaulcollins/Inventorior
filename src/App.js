@@ -15,7 +15,7 @@ function App() {
       <Nav />
       <Router>
         <Route exact path='/' component={ItemField} />
-        <Route exact path='/item/:id' component={ItemDetailPage} />
+        <Route exact path='/item/:id' params={{id: ''}} component={ItemDetailPage} />
       </Router>
     </div>
   );

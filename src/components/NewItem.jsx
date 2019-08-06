@@ -1,5 +1,6 @@
 import React from 'react'
 import firebase from 'firebase';
+import { v4 } from 'uuid';
 
 
 class NewItem extends React.Component {
@@ -22,6 +23,7 @@ class NewItem extends React.Component {
     e.preventDefault();
     const db = firebase.firestore();
     db.collection('items').add({
+      id: v4(),
       itemName: this.state.itemName,
       itemQuantity: this.state.itemQuantity,
       itemLocation: this.state.itemLocation
