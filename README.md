@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple inventorying application I'm building for a friend's business. It will the user to take pictures of items used in their business, hobby, etc., and allow them to take pictures of the item, track it's usage, storage location, and who may be in possession of the item (if loaned out).
 
 ## Available Scripts
 

@@ -4,8 +4,12 @@ import ItemField from './components/ItemField'
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import ItemDetailPage from './components/ItemDetailPage';
+import firebaseConfig from './constants/firebaseConfig';
+import firebase from 'firebase';
+
 
 function App() {
+  firebase.initializeApp(firebaseConfig);
   return (
     <div className="App">
       <Nav />

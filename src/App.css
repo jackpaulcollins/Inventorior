@@ -19,8 +19,8 @@
 
 /* Box Styles */
 .item-box {
-  height: 7rem;
-  width: 5rem;
+  display: flex;
+  padding: 1rem;
   border: solid gray 1px;
   margin: 2%;
 }
