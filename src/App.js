@@ -1,10 +1,11 @@
 import React from 'react';
 import Nav from './components/Nav'
 import ItemField from './components/ItemField'
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
+import ItemDetailPage from './components/ItemDetailPage';
 import firebaseConfig from './constants/firebaseConfig';
 import firebase from 'firebase';
-
 
 
 function App() {
@@ -12,7 +13,10 @@ function App() {
   return (
     <div className="App">
       <Nav />
-      <ItemField />
+      <Router>
+        <Route exact path='/' component={ItemField} />
+        <Route exact path='/item/:id' component={ItemDetailPage} />
+      </Router>
     </div>
   );
 }

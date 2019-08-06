@@ -10,7 +10,14 @@ class ItemField extends React.Component {
       itemBoxes: null,
       data: null
     }
+    this.createItem = this.createItem.bind(this);
     this.fetchItemdData = this.fetchItemdData.bind(this);
+  }
+
+  createItem() {
+    this.setState({
+      itemBoxes: this.state.itemBoxes + 1
+    }) 
   }
 
   componentDidMount() {
@@ -52,6 +59,7 @@ class ItemField extends React.Component {
                                             itemQuantity={this.state.data[i].itemQuantity} 
                                             itemLocation={this.state.data[i].itemLocation}
                                             />)
+
     }
     return numberOfItemBoxesToRender;
   }
@@ -59,6 +67,7 @@ class ItemField extends React.Component {
   render () {
     return (
       <div>
+        <button onClick={this.createItem}>Add Item to Inventory</button>
         <NewItem />
         <div className='item-field'>
         {this.getBoxesToRender()}
