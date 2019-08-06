@@ -71,7 +71,6 @@ class ItemField extends React.Component {
   render () {
     return (
       <div>
-        <button onClick={this.createItem}>Add Item to Inventory</button>
         <NewItem />
         <div className='item-field'>
         {this.getBoxesToRender()}
