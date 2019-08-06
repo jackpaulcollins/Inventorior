@@ -1,26 +1,68 @@
-import React from 'react'
-import Item from './Item'
+import React from 'react';
+import Item from './Item';
+import NewItem from './NewItem';
+import firebase from 'firebase';
 
 class ItemField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemBoxes: 90
+      itemBoxes: null,
+      data: null
     }
+    this.fetchItemdData = this.fetchItemdData.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchItemdData();
+  }
+
+  componentWillUpdate() {
+    this.fetchItemdData();
+  }
+
+  fetchItemdData() {
+    this.getItemsPromise().then((data) => {
+      this.setState({ data: data,
+                      itemBoxes: data.length
+                     })
+    });
+  }
+
+  getItemsPromise() {
+    return new Promise((resolve, reject) => {
+      this.cancelPromise = reject;
+      const db = firebase.firestore();
+      db.collection("items").get().then(function(querySnapshot) {
+        let data = [];
+        querySnapshot.forEach(function(doc) {
+          data.push(doc.data());
+        });
+        resolve(data);
+      });
+    });
   }
 
   getBoxesToRender(){
     let numberOfItemBoxesToRender = [];
     for (let i = 0; i < this.state.itemBoxes; i++) {
-      numberOfItemBoxesToRender.push(<Item key={i} />)
+      numberOfItemBoxesToRender.push(
+                                      <Item key={i} 
+                                            itemName={this.state.data[i].itemName}
+                                            itemQuantity={this.state.data[i].itemQuantity} 
+                                            itemLocation={this.state.data[i].itemLocation}
+                                            />)
     }
     return numberOfItemBoxesToRender;
   }
 
   render () {
     return (
-      <div className='item-field'>
-       {this.getBoxesToRender()}
+      <div>
+        <NewItem />
+        <div className='item-field'>
+        {this.getBoxesToRender()}
+        </div>
       </div>
     )
   }
