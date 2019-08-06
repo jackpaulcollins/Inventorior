@@ -10,11 +10,22 @@ class ItemField extends React.Component {
       itemBoxes: null,
       data: null
     }
+    this.fetchItemdData = this.fetchItemdData.bind(this);
   }
 
   componentDidMount() {
+    this.fetchItemdData();
+  }
+
+  componentWillUpdate() {
+    this.fetchItemdData();
+  }
+
+  fetchItemdData() {
     this.getItemsPromise().then((data) => {
-      this.setState({ data: data })
+      this.setState({ data: data,
+                      itemBoxes: data.length
+                     })
     });
   }
 
@@ -35,7 +46,12 @@ class ItemField extends React.Component {
   getBoxesToRender(){
     let numberOfItemBoxesToRender = [];
     for (let i = 0; i < this.state.itemBoxes; i++) {
-      numberOfItemBoxesToRender.push(<Item key={i} />)
+      numberOfItemBoxesToRender.push(
+                                      <Item key={i} 
+                                            itemName={this.state.data[i].itemName}
+                                            itemQuantity={this.state.data[i].itemQuantity} 
+                                            itemLocation={this.state.data[i].itemLocation}
+                                            />)
     }
     return numberOfItemBoxesToRender;
   }
