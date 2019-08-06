@@ -6,7 +6,7 @@ class ItemDetailPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: {}
     }
   }
 
@@ -39,10 +39,10 @@ class ItemDetailPage extends React.Component {
       this.cancelPromise = reject;
       const db = firebase.firestore();
       db.collection("items").get().then(function(querySnapshot) {
-        let data = [];
+        let data = {};
         querySnapshot.forEach(function(doc) {
           if (doc.data().id === id) {
-            data.push(doc.data());
+            data = {...doc.data()};
           }
         });
         resolve(data);
@@ -55,9 +55,9 @@ class ItemDetailPage extends React.Component {
     return (
       <div className='item-detail-box'>
         <div className='item-details'>
-          <h1>Item Title: {this.state.data ? this.state.data[0].itemName : ''}</h1>
-          <p>Item count: {this.state.data ? this.state.data[0].itemQuantity : ''}</p>
-          <p>Item Location: {this.state.data ? this.state.data[0].itemLocation : ''}</p>
+          <h1>Item Title: {this.state.data ? this.state.data.itemName : ''}</h1>
+          <p>Item count: {this.state.data ? this.state.data.itemQuantity : ''}</p>
+          <p>Item Location: {this.state.data ? this.state.data.itemLocation : ''}</p>
         </div>
       </div>
     )
