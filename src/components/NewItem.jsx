@@ -1,5 +1,6 @@
 import React from 'react'
 import firebase from 'firebase';
+import PropTypes from 'prop-types';
 
 class NewItem extends React.Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class NewItem extends React.Component {
       itemQuantity: 0,
       itemLocation: ''
     });
+    this.props.updateItems();
   };
 
   render () {
@@ -61,5 +63,9 @@ class NewItem extends React.Component {
     )
   }
 };
+
+NewItem.propTypes = {
+  updateItems: PropTypes.func
+}
 
 export default NewItem;

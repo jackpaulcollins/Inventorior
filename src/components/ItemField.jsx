@@ -11,21 +11,19 @@ class ItemField extends React.Component {
       itemBoxes: null,
       items: null
     }
-    this.fetchItemdData = this.fetchItemdData.bind(this);
+    this.fetchItemData = this.fetchItemData.bind(this);
   }
 
   componentDidMount() {
     this._isMounted = true;
-    this.fetchItemdData();
+    this.fetchItemData();
   }
 
   componentWillUnmount() {
     this._isMounted = false;
   }
 
-
-
-  fetchItemdData() {
+  fetchItemData() {
     if (this._isMounted) {
       this.getItemsPromise().then((data) => {
         this.setState({ items: data,
@@ -42,9 +40,10 @@ class ItemField extends React.Component {
       db.collection("items").get().then(function(querySnapshot) {
         let data = [];
         querySnapshot.forEach(function(doc) {
-          data.push({ id: doc.id,
-                   data: doc.data()
-                  });
+          data.push({ 
+                      id: doc.id,
+                      data: doc.data()
+                    });
         });
         resolve(data);
       });
@@ -67,10 +66,9 @@ class ItemField extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     return (
       <div>
-        <NewItem />
+        <NewItem updateItems={this.fetchItemData}/>
         <div className='item-field'>
         {this.getBoxesToRender()}
         </div>
