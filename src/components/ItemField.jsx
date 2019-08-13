@@ -9,7 +9,7 @@ class ItemField extends React.Component {
     super(props);
     this.state = {
       itemBoxes: null,
-      data: null
+      items: null
     }
     this.fetchItemdData = this.fetchItemdData.bind(this);
   }
@@ -23,16 +23,12 @@ class ItemField extends React.Component {
     this._isMounted = false;
   }
 
-  componentWillUpdate() {
-    if (this._isMounted) {
-      this.fetchItemdData();
-    }
-  }
+
 
   fetchItemdData() {
     if (this._isMounted) {
       this.getItemsPromise().then((data) => {
-        this.setState({ data: data,
+        this.setState({ items: data,
                         itemBoxes: data.length
                       })
       });
@@ -46,7 +42,9 @@ class ItemField extends React.Component {
       db.collection("items").get().then(function(querySnapshot) {
         let data = [];
         querySnapshot.forEach(function(doc) {
-          data.push(doc.data());
+          data.push({ id: doc.id,
+                   data: doc.data()
+                  });
         });
         resolve(data);
       });
@@ -58,10 +56,10 @@ class ItemField extends React.Component {
     for (let i = 0; i < this.state.itemBoxes; i++) {
       numberOfItemBoxesToRender.push(
                                       <Item key={i}
-                                            id={this.state.data[i].id}
-                                            itemName={this.state.data[i].itemName}
-                                            itemQuantity={this.state.data[i].itemQuantity} 
-                                            itemLocation={this.state.data[i].itemLocation}
+                                            id={this.state.items[i].id}
+                                            itemName={this.state.items[i].data.itemName}
+                                            itemQuantity={this.state.items[i].data.itemQuantity} 
+                                            itemLocation={this.state.items[i].data.itemLocation}
                                             />)
 
     }
@@ -69,6 +67,7 @@ class ItemField extends React.Component {
   }
 
   render () {
+    console.log(this.state)
     return (
       <div>
         <NewItem />

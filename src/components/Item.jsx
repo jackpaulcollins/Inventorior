@@ -10,6 +10,7 @@ class Item extends React.Component {
   }
 
   render () {
+    console.log(this.props)
     return (
       <div className='item-box'>
         <div>

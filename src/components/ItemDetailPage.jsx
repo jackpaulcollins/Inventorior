@@ -19,11 +19,11 @@ class ItemDetailPage extends React.Component {
     this._isMounted = false;
   }
 
-  componentWillUpdate() {
-    if (this._isMounted) {
-      this.fetchItemData();
-    }
-  }
+  // componentWillUpdate() {
+  //   if (this._isMounted) {
+  //     this.fetchItemData();
+  //   }
+  // }
 
   fetchItemData() {
     if (this._isMounted) {
@@ -31,6 +31,16 @@ class ItemDetailPage extends React.Component {
           this.setState({ data: data })
       });
     }
+  }
+
+  deleteItemFromDatabase (id) {
+    console.log(id)
+    const db = firebase.firestore();
+      db.collection("items").doc(`${id}`).delete().then(function() {
+        console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
   }
 
   getItemPromise() {
@@ -41,7 +51,7 @@ class ItemDetailPage extends React.Component {
       db.collection("items").get().then(function(querySnapshot) {
         let data = {};
         querySnapshot.forEach(function(doc) {
-          if (doc.data().id === id) {
+          if (doc.id === id) {
             data = {...doc.data()};
           }
         });
@@ -51,13 +61,14 @@ class ItemDetailPage extends React.Component {
   }
 
   render () {
-    console.log(this.state.data)
+    console.log('hello')
     return (
       <div className='item-detail-box'>
         <div className='item-details'>
           <h1>Item Title: {this.state.data ? this.state.data.itemName : ''}</h1>
           <p>Item count: {this.state.data ? this.state.data.itemQuantity : ''}</p>
           <p>Item Location: {this.state.data ? this.state.data.itemLocation : ''}</p>
+          <button onClick={() => this.deleteItemFromDatabase(this.props.match.params.id)}>Delete Item</button>
         </div>
       </div>
     )
