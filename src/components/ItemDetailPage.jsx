@@ -10,6 +10,7 @@ class ItemDetailPage extends React.Component {
       itemBeingUpdated: false
     }
     this.fetchItemData = this.fetchItemData.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
@@ -54,12 +55,17 @@ class ItemDetailPage extends React.Component {
     });
   }
 
+  closeModal() {
+    this.setState({ itemBeingUpdated: false })
+  }
+
   render () {
     const modalContent = this.state.itemBeingUpdated ? <UpdateItemModal id={this.props.match.params.id}
                                                                         title={this.state.data.itemName}
                                                                         quantity={this.state.data.itemQuantity} 
                                                                         location={this.state.data.itemLocation}
-                                                                        reloadUpdatedItem={this.fetchItemData}/> 
+                                                                        reloadUpdatedItem={this.fetchItemData}
+                                                                        closeModal={this.closeModal}/> 
                                                                         : ''
     return (
       <div className='item-detail-box'>

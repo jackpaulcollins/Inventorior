@@ -30,6 +30,8 @@ class UpdateItemModal extends React.Component {
       itemLocation: this.state.itemLocation
     });
     this.props.reloadUpdatedItem();
+    this.props.closeModal();
+    alert("Item Succesfully Updated")
   };
 
 
@@ -70,7 +72,8 @@ UpdateItemModal.propTypes = {
   title: PropTypes.string,
   quantity: PropTypes.string,
   location: PropTypes.string,
-  reloadUpdatedItem: PropTypes.func
+  reloadUpdatedItem: PropTypes.func,
+  closeModal: PropTypes.func
 };
 
 export default UpdateItemModal;
