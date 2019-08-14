@@ -12,8 +12,8 @@ function App() {
   firebase.initializeApp(firebaseConfig);
   return (
     <div className="App">
-      <Nav />
       <Router>
+        <Nav />
         <Route exact path='/' component={ItemField} />
         <Route exact path='/item/:id' params={{id: ''}} component={ItemDetailPage} />
       </Router>
