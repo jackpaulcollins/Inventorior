@@ -9,7 +9,7 @@ class UpdateItemModal extends React.Component {
     this.state = {
       itemName: this.props.title,
       itemQuantity: this.props.quantity,
-      itemLocation: this.props.itemLocation
+      itemLocation: this.props.location
     }
   }
 
@@ -24,19 +24,19 @@ class UpdateItemModal extends React.Component {
     e.preventDefault();
     const id = this.props.id
     const db = firebase.firestore();
-    const itemToUpdate = db.collection("cities").doc(id)
-    itemToUpdate.collection('items').update({
+    db.collection("items").doc(id).update({
       itemName: this.state.itemName,
       itemQuantity: this.state.itemQuantity,
       itemLocation: this.state.itemLocation
     });
+    this.props.reloadUpdatedItem();
   };
 
 
   render () {
     return (
       <div>
-         <form onSubmit={this.addItem}>
+         <form onSubmit={this.updateItem}>
         <input
           type="text"
           id="itemName"
@@ -69,7 +69,8 @@ UpdateItemModal.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   quantity: PropTypes.string,
-  location: PropTypes.string
+  location: PropTypes.string,
+  reloadUpdatedItem: PropTypes.func
 };
 
 export default UpdateItemModal;

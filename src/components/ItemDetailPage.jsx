@@ -3,30 +3,23 @@ import firebase from 'firebase';
 import UpdateItemModal from './UpdateItemModal'
 
 class ItemDetailPage extends React.Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
       data: {},
       itemBeingUpdated: false
     }
+    this.fetchItemData = this.fetchItemData.bind(this);
   }
 
   componentDidMount() {
-    this._isMounted = true;
     this.fetchItemData();
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
   fetchItemData() {
-    if (this._isMounted) {
-      this.getItemPromise().then((data) => {
-          this.setState({ data: data })
-      });
-    }
+    this.getItemPromise().then((data) => {
+        this.setState({ data: data })
+    });
   }
 
   deleteItemFromDatabase (id) {
@@ -41,7 +34,7 @@ class ItemDetailPage extends React.Component {
   }
 
   updateItem () {
-    this.setState ({ itemBeingUpdated: true})
+    this.setState ({ itemBeingUpdated: true })
   }
 
   getItemPromise() {
@@ -63,9 +56,10 @@ class ItemDetailPage extends React.Component {
 
   render () {
     const modalContent = this.state.itemBeingUpdated ? <UpdateItemModal id={this.props.match.params.id}
-                                                                        tite={this.state.data.itemName}
+                                                                        title={this.state.data.itemName}
                                                                         quantity={this.state.data.itemQuantity} 
-                                                                        location={this.state.data.itemLocation}/> 
+                                                                        location={this.state.data.itemLocation}
+                                                                        reloadUpdatedItem={this.fetchItemData}/> 
                                                                         : ''
     return (
       <div className='item-detail-box'>

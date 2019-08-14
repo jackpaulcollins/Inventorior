@@ -4,7 +4,6 @@ import NewItem from './NewItem';
 import firebase from 'firebase';
 
 class ItemField extends React.Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -15,22 +14,15 @@ class ItemField extends React.Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
     this.fetchItemData();
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
   fetchItemData() {
-    if (this._isMounted) {
       this.getItemsPromise().then((data) => {
         this.setState({ items: data,
                         itemBoxes: data.length
                       })
       });
-    }
   }
 
   getItemsPromise() {
