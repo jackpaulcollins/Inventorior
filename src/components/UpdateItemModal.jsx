@@ -37,31 +37,38 @@ class UpdateItemModal extends React.Component {
 
   render () {
     return (
-      <div>
-         <form onSubmit={this.updateItem}>
-        <input
-          type="text"
-          id="itemName"
-          placeholder="Item Name"
-          onChange={this.updateInput}
-          value={this.state.itemName}
-        />
-         <input
-          type="text"
-          id="itemQuantity"
-          placeholder="Item Quantity"
-          onChange={this.updateInput}
-          value={this.state.itemQuantity}
-        />
-         <input
-          type="text"
-          id="itemLocation"
-          placeholder="Item Location"
-          onChange={this.updateInput}
-          value={this.state.itemLocation}
-        />
+      <div className="update-item-modal">
+        <form onSubmit={this.updateItem}>
+        <div>
+          <input
+            type="text"
+            id="itemName"
+            placeholder="Item Name"
+            onChange={this.updateInput}
+            value={this.state.itemName}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            id="itemQuantity"
+            placeholder="Item Quantity"
+            onChange={this.updateInput}
+            value={this.state.itemQuantity}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            id="itemLocation"
+            placeholder="Item Location"
+            onChange={this.updateInput}
+            value={this.state.itemLocation}
+          />
+        </div>
         <button type="submit">Update Item</button>
-      </form>
+        <button onClick={this.props.closeModal}>Cancel</button>
+       </form>
       </div>
     )
   }

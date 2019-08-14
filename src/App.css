@@ -34,3 +34,13 @@
   height: 50%;
   flex-wrap: wrap;
 }
+
+.update-item-modal{
+  display: flex;
+  flex-direction: column;
+  border: .5px solid lightgray;
+  margin: auto;
+  width: 10rem;
+  padding: 1%;
+  z-index: 999;
+}
