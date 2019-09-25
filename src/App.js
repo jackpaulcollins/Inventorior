@@ -7,7 +7,6 @@ import ItemDetailPage from './components/ItemDetailPage';
 import firebaseConfig from './constants/firebaseConfig';
 import firebase from 'firebase';
 
-
 function App() {
   firebase.initializeApp(firebaseConfig);
   return (
