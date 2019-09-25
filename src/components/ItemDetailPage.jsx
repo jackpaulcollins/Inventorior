@@ -36,6 +36,7 @@ class ItemDetailPage extends React.Component {
 
   updateItem () {
     this.setState ({ itemBeingUpdated: true })
+    this.forceUpdate();
   }
 
   getItemPromise() {

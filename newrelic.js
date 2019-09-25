@@ -9,11 +9,13 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['My Application'],
+
+  app_name: ['Inventorior'],
   /**
    * Your New Relic license key.
    */
-  license_key: 'license key here',
+  license_key: '3f9e51389f8751b3586dcbf6e6c4b1d13a8db604',
+>>>>>>> cc2520bbdb564f1ba40c43d16e9a3091600a5cb9
   logging: {
     /**
      * Level at which to log. 'trace' is most useful to New Relic when diagnosing
