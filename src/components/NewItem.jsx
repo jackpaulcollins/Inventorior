@@ -20,6 +20,9 @@ class NewItem extends React.Component {
   
   addItem = e => {
     e.preventDefault();
+    if (this.isFormEmpty()){
+      return false 
+    }
     const db = firebase.firestore();
     db.collection('items').add({
       itemName: this.state.itemName,
@@ -34,11 +37,22 @@ class NewItem extends React.Component {
     this.props.updateItems();
   };
 
+  isFormEmpty = () => {
+    const name = this.state.itemName
+    const quantity = this.state.itemQuantity
+    const location = this.state.itemLocation
+    if ((name === '') || (quantity === '') || (location === '')) {
+      alert('please complete the form')
+      return true
+    } 
+  }
+
   render () {
     return (
       <form onSubmit={this.addItem}>
         <input
           type="text"
+          className="new-form"
           id="itemName"
           placeholder="Item Name"
           onChange={this.updateInput}
@@ -46,6 +60,7 @@ class NewItem extends React.Component {
         />
          <input
           type="text"
+          className="new-form"
           id="itemQuantity"
           placeholder="Item Quantity"
           onChange={this.updateInput}
@@ -53,6 +68,7 @@ class NewItem extends React.Component {
         />
          <input
           type="text"
+          className="new-form"
           id="itemLocation"
           placeholder="Item Location"
           onChange={this.updateInput}
